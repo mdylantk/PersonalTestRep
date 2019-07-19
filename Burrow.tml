@@ -15,7 +15,7 @@ weight=1
 #
 # list of dimensions in which this template may spawn, even if generic
 # one or more dimension names, separated by commas (blank = all)
-dimensionsToSpawnIn=
+dimensionsToSpawnIn=overworld
 #
 # list of other biomes in which this template may spawn
 # biome corresponding to directory is always assumed, listed or not
@@ -30,7 +30,7 @@ biomeTypesToSpawnIn=
 # list of biomes in which this template may not spawn
 # takes precedence over biomeTypesToSpawnIn, but NOT biomesToSpawnIn
 # should be empty if biomeTypesToSpawnIn is empty
-biomesToNotSpawnIn=
+biomesToNotSpawnIn=ocean,deep_ocean,frozen_ocean,deep_frozen_ocean,cold_ocean,deep_cold_ocean,lukewarm_ocean,deep_lukewarm_ocean,warm_ocean,deep_warm_ocean,mushroom_fields,desert_hills,desert,ice_spikes,badlands,badlands_plateau,eroded_badlands
 #
 # depth template is pushed down into the surface when built
 # offset is min/max range of random additional bury depth
