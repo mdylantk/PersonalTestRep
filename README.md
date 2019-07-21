@@ -1,3 +1,2 @@
 # PersonalTestRep
-Personal hello world project focus on learning github and testing code for random, yet similar projects.
-(note this may not be too active). 
+Random test projects are posted or test here.
