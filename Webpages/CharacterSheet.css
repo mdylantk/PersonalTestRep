@@ -1,0 +1,93 @@
+:root {
+  /* global colors */
+  --primaryColor: Black;
+  --backgroundColor: White;
+  --secondaryColor: White;
+  /* global text */
+  --textColor: Green;
+  --hyperlinkColor: Blue;
+  --hoverColor: Red;
+  --fontSizeSmall: 12px;
+  --fontSizeMedium: 16px;
+  --fontSizeLarge: 32px;
+  --fontFamily: Comic Sans MS;
+  /* global sizes */
+  --leftWidth: 11%;
+  --rightWidth: 11%;
+  --bodyWidth: 76%
+}
+
+/* overrides */
+
+summary {
+  list-style: none
+}
+
+
+
+details summary::before {
+  content: ">";
+}
+
+details[open] summary::before {
+  content: "^";
+}
+
+@supports not (-ms-ime-align: auto) { /* IE and old edge do not support details. This is a patch that try to ignore chnages to summary that may break formating when details tag is ignored*/
+  details summary {
+    cursor: pointer;
+  }
+
+    details summary > * { /* patch to prevent newlines with nested tags in <summary> */
+      display: inline;
+    }
+}
+
+/* custom*/
+.page-container {
+  display: grid;
+  grid-template-columns: var(--leftWidth) var(--bodyWidth) var(--rightWidth);
+  grid-template-rows: auto;
+  grid-template-areas: "header header header" "left-sidebar main right-sidebar" "footer footer footer";
+  gap: 0.5% 0.5%;
+}
+
+.main-style {
+  font-size: var(--fontSizeMedium);
+  border-style: solid;
+}
+
+.header-style {
+  font-size: var(--fontSizeLarge);
+  border-style: solid;
+}
+
+.footer-style {
+  font-size: var(--fontSizeSmall);
+  border-style: solid;
+}
+
+.main-background {
+  background-color: var(--backgroundColor); /* may not be needed(or too risky). here for example */
+}
+
+.main-text {
+  font-size: var(--fontSizeMedium);
+  font-family: var(--fontFamily);
+  color: var(--primaryColor);
+}
+
+.character-container {
+  display: grid;
+  grid-template-columns: 49.5% 49.5%;
+  grid-template-rows: auto;
+  gap: 1% 1%;
+}
+
+.character-info { /* may need to apply the config in the html for specail sizes. if used more than one, it can be used as a style */
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.character-fields {
+}
