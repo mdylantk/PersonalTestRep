@@ -1,0 +1,199 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" style="width: 100%;">
+
+<head id="Head">
+  <meta htt-equiv="CONTENT-TYPE" content="text/html; charset=UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <title>Character Sheet</title>
+
+  <link rel="stylesheet" href="./characterSheet.css">
+  <link rel="icon" href="https://64.media.tumblr.com/avatar_8ced86803bae_64.pnj"><!-- TODO: supply this directly-->
+
+</head>
+
+
+<body class="main-text main-background box-style">
+  <section class="page-container">
+
+    <header class="header-style" style="grid-area: header"><center>header</center></header>
+    <footer class="footer-style" style="grid-area: footer"><center>footer<br />notice: content reflected here is for testing and debugging</center></footer>
+    <aside class="main-style" style="grid-area: left-sidebar">l sidebar</aside>
+    <aside class="main-style" style="grid-area: right-sidebar">r sidebar</aside>
+    <section class="main-style" style="grid-area: main">
+      <center>main section</center>
+
+      <article class="character-container main-style">
+        <details open class="character-info character-fields main-style">
+          <summary><h1>Character info</h1></summary>
+          <form name="characterInfo" id="characterInfo" onchange="console.log(this)">
+            <label>Character:</label>
+            <input name="character" id="character" data-attribute="character" style="width: 48px;" onchange="CharacterData.setMeta(this, 'character', this.dataset.attribute);" />
+            <label>Player:</label>
+            <input name="player" id="player" data-attribute="character" style="width: 48px;" onchange="CharacterData.setMeta(this,'player',this.dataset.attribute);" />
+          </form>
+        </details>
+
+        <details open class="character-fields main-style">
+          <summary><h1>Stats</h1></summary>
+          <form name="attributesForm" onchange="console.log(this)">
+            <label>Str:</label>
+            <input type="number" name="str" id="str" style="width: 48px;" onchange="CharacterData.setMeta(this, 'base', 'str'); CharacterData.updateFields('str');" />
+            <label>Bonus:</label>
+            <input type="number" name="bonusStr" id="bonusStr" style="width: 48px;" onchange="CharacterData.setMeta(this,'bonus','str'); CharacterData.updateFields('str');" />
+            Mod: <span id="strModifier"></span> Total: <span id="strTotal"></span>
+            <br />
+            <label>Con:</label>
+            <input type="number" name="con" id="con" style="width: 48px;" onchange="CharacterData.setMeta(this,'base','con'); CharacterData.updateFields('con');" />
+            <label>Bonus:</label>
+            <input type="number" name="bonusCon" id="bonusCon" style="width: 48px;" onchange="CharacterData.setMeta(this,'bonus','con'); CharacterData.updateFields('con');" />
+            Mod: <span id="conModifier"></span> Total: <span id="conTotal"></span>
+            <br />
+            <label>Dex:</label>
+            <input type="number" name="dex" id="dex" style="width: 48px;" onchange="CharacterData.setMeta(this,'base','dex'); CharacterData.updateFields('dex');" />
+            <label>Bonus:</label>
+            <input type="number" name="bonusDex" id="bonusDex" style="width: 48px;" onchange="CharacterData.setMeta(this,'bonus','dex'); CharacterData.updateFields('dex');" />
+            Mod: <span id="dexModifier"></span> Total: <span id="dexTotal"></span>
+            <br />
+            <label>Int:</label>
+            <input type="number" name="int" id="int" style="width: 48px;" onchange="CharacterData.setMeta(this,'base','int'); CharacterData.updateFields('int');" />
+            <label>Bonus:</label>
+            <input type="number" name="bonusInt" id="bonusInt" style="width: 48px;" onchange="CharacterData.setMeta(this,'bonus','int'); CharacterData.updateFields('int');" />
+            Mod: <span id="intModifier"></span> Total: <span id="intTotal"></span>
+            <br />
+            <label>Wis:</label>
+            <input type="number" name="wis" id="wis" style="width: 48px;" onchange="CharacterData.setMeta(this,'base','wis'); CharacterData.updateFields('wis');" />
+            <label>Bonus:</label>
+            <input type="number" name="bonusWis" id="bonusWis" style="width: 48px;" onchange="CharacterData.setMeta(this,'bonus','wis'); CharacterData.updateFields('wis');" />
+            Mod: <span id="wisModifier"></span> Total: <span id="wisTotal"></span>
+            <br />
+            <label>Chr:</label>
+            <input type="number" name="chr" id="chr" style="width: 48px;" onchange="CharacterData.setMeta(this,'base','chr'); CharacterData.updateFields('chr');" />
+            <label>Bonus:</label>
+            <input type="number" name="bonusChr" id="bonusChr" style="width: 48px;" onchange="CharacterData.setMeta(this,'bonus','chr'); CharacterData.updateFields('chr');" />
+            Mod: <span id="chrModifier"></span> Total: <span id="chrTotal"></span>
+          </form>
+        </details>
+        <details open class="character-fields main-style" style="grid-row-end: span 2">
+          <summary><h1>Skill</h1></summary>
+          <br /><br /><br /><br />
+        </details>
+        <details open class="character-fields main-style">
+          <summary><h1>Misc</h1></summary>
+        </details>
+        <details open class="character-info character-fields main-style">
+          <summary><h1>Traits</h1></summary>
+        </details>
+      </article>
+
+    </section>
+
+  </section>
+
+</body>
+
+</html>
+
+<template id="attributeTemplate">
+  <form name="attribute" id="attributeForm" data-attribute='attribute' onchange="console.log(this)">
+    <label>Base:</label>
+    <input type="number" name="base" id="base" data-attribute='attribute' style="width: 48px;" onchange="CharacterData.setMeta(this, 'base', this.dataset.attribute); CharacterData.updateFields(this.data-attribute);" />
+    <label>Bonus:</label>
+    <input type="number" name="bonus" id="bonus" data-attribute='attribute' style="width: 48px;" onchange="CharacterData.setMeta(this,'bonus',this.dataset.attribute); CharacterData.updateFields(this.data-attribute);" />
+    Mod: <span id="modifier"></span> Total: <span id="total"></span>
+  </form>
+</template>
+
+
+<script>
+  let testie = document.getElementById('attributeTemplate');
+  let test3 = testie.content.cloneNode(true);
+  console.log(testie);
+  console.log(test3.getElementById('base'));//look like it need to be clone to work
+  testie = testie.content.cloneNode(true);
+  console.log(testie.getElementById('base'));//look like it need to be clone to work
+
+  //BIGNOTE: form can handle events and pass itself. could hold lots of the repeatable data here and have it handle updating all the feilds. could have a form for each stats (easier) or have one for each stat type(complex)
+  //the function need to know the form layout. looping input be ideal. then it uses data-attribute to update anything related to that tag
+
+  //ALSO maybe let the meta be more organized by adding a type dim. in a sence the higher level (meta) can be split into meta, atributes and text. meta being defualt adn attribute being numbers. text is text display
+
+  //CharacterData object holds all the methood and var dealing with the character sheet. caplised due to it behaving like a namespace
+  let CharacterData = {
+    //meta any values that might be modified. better to encap it in a meta object so other less dynamic values do not get modified incorectly
+    meta: {
+      //values that will be modify bey various means
+      //objects are usally a list of modifiers to the var. format of the name is menat to help with adding/removing or ignoring
+      //base and bonus are usallt tie together. then there armor and natural bonus that appy to ac, but armor only get counted by some things so adding an symbloy at the start of equitment ids can be used to ignore it ot identify it
+      //'@neck:cake': 7 //seems anything goses with string keys so @ and # can be used
+      //bonus id is a generic bonus that may be added various ways. it like the base, but ment to be change more often. debug or to preserver orignal values is the use. unquie bonuses are used for temperay boost andle by other feilds
+      //note this may hold text/discription as well as unoragnaixzed types. text/discription may have it own feild once a better name is decided
+    },
+    attributes: {},//number based meta. lot of the comment above is for this once data get rearrange
+    //other var are functions and consts
+    setMeta: function (input, name, type) { //wither add a function to add stat/var in groups, or add an optinal parameter that will try to insert it
+      console.log(input); console.log(input.name); console.log(input.dataset.attribute); console.log(input.value);
+      let value;
+      if (input.type == 'number') {
+        value = !isNaN(Number(input.value)) ? Number(input.value) : 0;
+      }
+      else {
+        value = input.value;
+      }
+      if (typeof name != 'undefined') { //probably shouch check if string for id and maybe for name (but number may work too) so generaly not an object
+        if (typeof type == 'object' || type == null) {
+          this.meta.misc[name] = value;
+        }
+        else {
+          if (typeof this.meta[type] == 'undefined') {
+            this.meta[type] = {};
+          }
+          this.meta[type][name] = value;
+        }
+
+
+        //debug
+        console.log('input name');
+        console.log(input.type);
+        console.log('value');
+        console.log(value);
+        console.table(CharacterData.meta);
+        //document.getElementById(type + 'Modifier').innerHTML = this.getModifire(type); //Note: this should call a methood that update all feilds that depens on meta data. (issue it could cost a but if there a lot of dynamic elemets. using diffrent functions or creating an event system would help)
+        //NOTE: type is confusing in this case, since the attribute is the type and the name is the id of the modifier
+      }
+    },
+    getTotal: function (type) {
+      let value = 0;
+      let attribute = this.meta[type];
+      if (typeof attribute != 'undefined') {
+        if (typeof attribute == 'object') {
+          for (let i in (attribute)) { //mose this to it own function? it may be used to get the some of a meta design to be a number...also may need additinal check if meta will have non numbers or get complex
+            value += !isNaN(Number(attribute[i])) ? Number(attribute[i]) : 0; //value = value + 23 will = 23 for some reason
+          }
+        }
+        else {
+          value = !isNaN(Number(attribute)) ? Number(attribute) : 0;
+        }
+      }
+      return value;
+    },
+    getModifire: function (type) {
+      return Math.floor((this.getTotal(type) - 10) / 2);
+    },
+    updateFields: function (type) {
+      document.getElementById(type + 'Modifier').innerHTML = this.getModifire(type);
+      document.getElementById(type + 'Total').innerHTML = this.getTotal(type);
+    }
+  }
+
+  //NOTE!!! a lot of the stats uses it attribue name as a Type. this link to all the values that effect it. in a sence a lot of the html could be built with a list of types as long as it is pointed somewhere. could use the template html to format a cell and then dupucate it with the modified values
+  //the issue is the function parameters. it can take the element so the attribue id may need to be an data tag then js could modifyit as a html element instead of as a string
+
+  //console.table(characterData);
+  //Note: feild funtion can be simple. the parameter would be where the data is stored in a table and used later in other areas as long as the type is correct.
+  //Ac feild would call something like setCharacterVar('AC') (chect to see how input is handle. It might need to access the fieild directly).
+
+</script>
